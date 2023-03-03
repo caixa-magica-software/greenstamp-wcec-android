@@ -2,15 +2,19 @@
 
 mkdir sootOutput
 mkdir resources/files_to_analyse/
-clear
+#clear
 
+echo 'Starting'
 java -cp soot-infoflow-cmd-jar-with-dependencies.jar CFG.java $1 > resources/cg.txt
 if [ -s resources/cg.txt ]; then
-    clear
+    echo 'Have resources'
+    #clear
+    echo "$(ls -A sootOutput/)"
     while [ -z  "$(ls -A sootOutput/)" ]
     do
+        echo 'Process...'
         java -cp soot-infoflow-cmd-jar-with-dependencies.jar soot.tools.CFGViewer -w -allow-phantom-refs -android-jars "/usr/lib/android-sdk/platforms" -process-multiple-dex -output-format jimple -src-prec apk -process-dir $1
-        clear
+        #clear
     done
 
     #Call graph refinements
@@ -45,7 +49,7 @@ if [ -s resources/cg.txt ]; then
     find sootOutput/ -name "kotlin.*" -print0 | xargs -0 rm
     find sootOutput/ -name "kotlinx.*" -print0 | xargs -0 rm
     find sootOutput/ -name "*.sun.*" -print0 | xargs -0 rm
-    clear
+    #clear
     
     #delete lines
     find sootOutput/ -type f  -exec  sed -i '/->/d' {} \;
@@ -54,7 +58,7 @@ if [ -s resources/cg.txt ]; then
     find sootOutput/ -type f  -exec  sed -i '/node/d' {} \;
     find sootOutput/ -type f  -exec  sed -i '/\@/d' {} \;
     
-    clear   
+    #clear   
 
     find sootOutput/ -type f  -exec  sed -i '/[^\[]label=/d' {} \;
     find sootOutput/ -type f  -exec  sed -i '/\"if/d' {} \;
@@ -84,12 +88,14 @@ if [ -s resources/cg.txt ]; then
     find resources/files_to_analyse/ -type f  -exec  sed -i '/\\\"/d' {} \;
     find resources/files_to_analyse/ -type f  -exec  sed -i '/new/d' {} \;
     find resources/files_to_analyse/ -type f  -exec  sed -i -E '/r[0-9]+/d' {} \;
-    clear
+    #clear
     
     #delete empty files
     find resources/files_to_analyse/ -size 0 -print -delete
     find sootOutput/ -size 0 -print -delete
-    clear
+    #clear
+
+     echo 'Finished'
 
 else 
     echo 'soot error. Try again'
