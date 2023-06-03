@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+
+  wcec-ubi:
+    container_name: wcec-ubi
+    image: wcec-ubi
+    build: 
+      context: .
+      dockerfile: Dockerfile
