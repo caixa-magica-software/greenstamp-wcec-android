@@ -9,4 +9,9 @@ COPY --chown=opam . wcec
 
 RUN eval $(opam env) && opam install ./wcec
 
-# dune exec wcec /home/ferramenta/apks/facebook_lite.apk
+COPY ./script.sh /
+USER root 
+RUN chmod +x /script.sh
+USER opam
+# Set the entrypoint to the script with CMD arguments
+ENTRYPOINT ["/script.sh"]
