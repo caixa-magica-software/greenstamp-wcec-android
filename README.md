@@ -35,6 +35,5 @@ Run tester:
 
 ```
 cd wcec/
-#dune build
 dune exec wcec /apks/rtp.apk
 ```
