@@ -1,7 +1,7 @@
 # wcec-android
 
 
-Static analysis (Abstract Interpretation) tool for WCEC android app analysis.
+Static analysis (Abstract Interpretation) tool for WCEC android app analysis developed by UBI and integrated by CMS.
 
 
 ## dependecies:
