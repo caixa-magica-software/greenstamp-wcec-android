@@ -24,35 +24,39 @@ if [ -s resources/cg.txt ]; then
 
     #echo '|-->                  |'
 
-    sed -i '/Exception/d' resources/cg.txt
-    # cg refine
-    sed -i 's/.*\sin\s//g' resources/cg.txt
-    sed -i 's/ ==> /=/g' resources/cg.txt
-    sed -i 's/\$\$/../g' resources/cg.txt
-    sed -i 's/://g' resources/cg.txt
-    sed -i 's/\$1/.1/g' resources/cg.txt
-    #Replace <> in text
-    sed -i 's/<init>/init/g' resources/cg.txt
-    sed -i 's/<clinit>/clinit/g' resources/cg.txt
-    sed -i 's/<//g' resources/cg.txt
-    sed -i 's/>//g' resources/cg.txt
-    sed -i 's/\sclinit/ <clinit>/g' resources/cg.txt
-    sed -i 's/\sinit/ <init>/g' resources/cg.txt
+    #sed -i '/Exception/d' resources/cg.txt
+    #sed -i 's/.*\sin\s//g' resources/cg.txt
+    #sed -i 's/ ==> /=/g' resources/cg.txt
+    #sed -i 's/\$\$/../g' resources/cg.txt
+    #sed -i 's/://g' resources/cg.txt
+    #sed -i 's/\$1/.1/g' resources/cg.txt
+    #sed -i 's/<init>/init/g' resources/cg.txt
+    #sed -i 's/<clinit>/clinit/g' resources/cg.txt
+    #sed -i 's/<//g' resources/cg.txt
+    #sed -i 's/>//g' resources/cg.txt
+    #sed -i 's/\sclinit/ <clinit>/g' resources/cg.txt
+    #sed -i 's/\sinit/ <init>/g' resources/cg.txt
+
+    sed -i -e '/Exception/d' -e 's/.*\sin\s//g' -e 's/ ==> /=/g' -e 's/\$\$/../g' -e 's/://g' -e 's/\$1/.1/g' -e 's/<init>/init/g' -e 's/<clinit>/clinit/g' -e 's/</ /g' -e 's/>//g' -e 's/\sclinit/ <clinit>/g' -e 's/\sinit/ <init>/g' resources/cg.txt
+
 
     #################
 
     # get *.dot files (or any pattern you like) into one place
     echo "Get *.dot files (or any pattern you like) into one place - Current time: $(date +%T)"
-    find sootOutput/ -name "androidx.*" -print0 | xargs -0 rm
-    find sootOutput/ -name "org.*" -print0 | xargs -0 rm
-    find sootOutput/ -name "android.*" -print0 | xargs -0 rm
-    find sootOutput/ -name "com.google.*" -print0 | xargs -0 rm
-    find sootOutput/ -name "*.R.*" -print0 | xargs -0 rm
-    find sootOutput/ -name "*.BuildConfig*" -print0 | xargs -0 rm
-    find sootOutput/ -name "*.jimple" -print0 | xargs -0 rm
-    find sootOutput/ -name "kotlin.*" -print0 | xargs -0 rm
-    find sootOutput/ -name "kotlinx.*" -print0 | xargs -0 rm
-    find sootOutput/ -name "*.sun.*" -print0 | xargs -0 rm
+    #find sootOutput/ -name "androidx.*" -print0 | xargs -0 rm
+    #find sootOutput/ -name "org.*" -print0 | xargs -0 rm
+    #find sootOutput/ -name "android.*" -print0 | xargs -0 rm
+    #find sootOutput/ -name "com.google.*" -print0 | xargs -0 rm
+    #find sootOutput/ -name "*.R.*" -print0 | xargs -0 rm
+    #find sootOutput/ -name "*.BuildConfig*" -print0 | xargs -0 rm
+    #find sootOutput/ -name "*.jimple" -print0 | xargs -0 rm
+    #find sootOutput/ -name "kotlin.*" -print0 | xargs -0 rm
+    #find sootOutput/ -name "kotlinx.*" -print0 | xargs -0 rm
+    #find sootOutput/ -name "*.sun.*" -print0 | xargs -0 rm
+
+    find sootOutput/ \( -name "androidx.*" -o -name "org.*" -o -name "android.*" -o -name "com.google.*" -o -name "*.R.*" -o -name "*.BuildConfig*" -o -name "*.jimple" -o -name "kotlin.*" -o -name "kotlinx.*" -o -name "*.sun.*" \) -print0 -delete
+
     #clear
     
     #delete lines
@@ -111,6 +115,8 @@ if [ -s resources/cg.txt ]; then
  
     diff_seconds=$((end_time - start_time))
     echo "Test execution time in seconds: $diff_seconds"
+
+    echo '##Finished##wcec##test##'
 
 else 
     echo "Soot error. Try again - Current time: $(date +%T)"
