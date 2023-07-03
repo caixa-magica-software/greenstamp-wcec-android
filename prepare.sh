@@ -61,53 +61,54 @@ if [ -s resources/cg.txt ]; then
     
     #delete lines
     echo "delete lines - Current time: $(date +%T)"
-    find sootOutput/ -type f  -exec  sed -i '/->/d' {} \;
-    find sootOutput/ -type f  -exec  sed -i '/specialinvoke/d' {} \;
-    find sootOutput/ -type f  -exec  sed -i '/style/d' {} \;
-    find sootOutput/ -type f  -exec  sed -i '/node/d' {} \;
-    find sootOutput/ -type f  -exec  sed -i '/\@/d' {} \;
-    
-    #clear   
-    echo "clear - Current time: $(date +%T)"
-    find sootOutput/ -type f  -exec  sed -i '/[^\[]label=/d' {} \;
-    find sootOutput/ -type f  -exec  sed -i '/\"if/d' {} \;
-    find sootOutput/ -type f  -exec  sed -i -e '/{/d' {} \;
-    find sootOutput/ -type f  -exec  sed -i -e '/}/d' {} \;
+    #find sootOutput/ -type f  -exec  sed -i '/->/d' {} \;
+    #find sootOutput/ -type f  -exec  sed -i '/specialinvoke/d' {} \;
+    #find sootOutput/ -type f  -exec  sed -i '/style/d' {} \;
+    #find sootOutput/ -type f  -exec  sed -i '/node/d' {} \;
+    #find sootOutput/ -type f  -exec  sed -i '/\@/d' {} \;
+    #find sootOutput/ -type f  -exec  sed -i '/[^\[]label=/d' {} \;
+    #find sootOutput/ -type f  -exec  sed -i '/\"if/d' {} \;
+    #find sootOutput/ -type f  -exec  sed -i -e '/{/d' {} \;
+    #find sootOutput/ -type f  -exec  sed -i -e '/}/d' {} \;
+    #find sootOutput/ -type f  -exec  sed -i 's/,//g' {} \;
+    #find sootOutput/ -type f  -exec  sed -i 's/]//g' {} \;
+    #find sootOutput/ -type f  -exec  sed -i 's/\[//g' {} \;
+    #find sootOutput/ -type f  -exec  sed -i 's/label=//g' {} \;
+    #find sootOutput/ -type f  -exec  sed -i 's/;//g' {} \;
+    #find sootOutput/ -type f  -exec  sed -i -E 's/"[0-9]+"//g' {} \;
+    #find sootOutput/ -type f  -exec  sed -i -E 's/"//g' {} \;
+    #find sootOutput/ -type f -name "*.dot" -exec cp {} resources/files_to_analyse/ \;
 
-    #replace strings
-    echo "Replace strings - Current time: $(date +%T)"
-    find sootOutput/ -type f  -exec  sed -i 's/,//g' {} \;
-    find sootOutput/ -type f  -exec  sed -i 's/]//g' {} \;
-    find sootOutput/ -type f  -exec  sed -i 's/\[//g' {} \;
-    find sootOutput/ -type f  -exec  sed -i 's/label=//g' {} \;
-    find sootOutput/ -type f  -exec  sed -i 's/;//g' {} \;
-    find sootOutput/ -type f  -exec  sed -i -E 's/"[0-9]+"//g' {} \;
-    find sootOutput/ -type f  -exec  sed -i -E 's/"//g' {} \;
+    find sootOutput/ -type f -exec sed -i -e '/->/d' -e '/specialinvoke/d' -e '/style/d' -e '/node/d' -e '/@/d' -e '/[^\[]label=/d' -e '/\"if/d' -e '/{/d' -e '/}/d' -e 's/,//g' -e 's/]//g' -e 's/\[//g' -e 's/label=//g' -e 's/;//g' -e -E 's/"[0-9]+"//g' -e 's/"//g' {} \; -name "*.dot" -exec cp {} resources/files_to_analyse/ \;
 
-    #move sootOutput files to files_to_analyse folder
-    echo "Move sootOutput files to files_to_analyse folder - Current time: $(date +%T)"
-    find sootOutput/ -type f -name "*.dot" -exec cp {} resources/files_to_analyse/ \;
 
     #delete more lines
     echo "Delete more lines - Current time: $(date +%T)"
-    find resources/files_to_analyse/ -type f  -exec  sed -i '/(/d' {} \;
-    find resources/files_to_analyse/ -type f  -exec  sed -i '/&/d' {} \;
-    find resources/files_to_analyse/ -type f  -exec  sed -i '/)/d' {} \;
-    find resources/files_to_analyse/ -type f  -exec  sed -i '/\./d' {} \;
-    find resources/files_to_analyse/ -type f  -exec  sed -i '/cmp/d' {} \;
-    find resources/files_to_analyse/ -type f  -exec  sed -i '/\|/d' {} \;
-    find resources/files_to_analyse/ -type f  -exec  sed -i '/\^/d' {} \;
-    find resources/files_to_analyse/ -type f  -exec  sed -i '/\\\"/d' {} \;
-    find resources/files_to_analyse/ -type f  -exec  sed -i '/new/d' {} \;
-    find resources/files_to_analyse/ -type f  -exec  sed -i -E '/r[0-9]+/d' {} \;
+    #find resources/files_to_analyse/ -type f  -exec  sed -i '/(/d' {} \;
+    #find resources/files_to_analyse/ -type f  -exec  sed -i '/&/d' {} \;
+    #find resources/files_to_analyse/ -type f  -exec  sed -i '/)/d' {} \;
+    #find resources/files_to_analyse/ -type f  -exec  sed -i '/\./d' {} \;
+    #find resources/files_to_analyse/ -type f  -exec  sed -i '/cmp/d' {} \;
+    #find resources/files_to_analyse/ -type f  -exec  sed -i '/\|/d' {} \;
+    #find resources/files_to_analyse/ -type f  -exec  sed -i '/\^/d' {} \;
+    #find resources/files_to_analyse/ -type f  -exec  sed -i '/\\\"/d' {} \;
+    #find resources/files_to_analyse/ -type f  -exec  sed -i '/new/d' {} \;
+    #find resources/files_to_analyse/ -type f  -exec  sed -i -E '/r[0-9]+/d' {} \;
+
+    find resources/files_to_analyse/ -type f -exec sed -i -e '/(/d' -e '/&/d' -e '/)/d' -e '/\./d' -e '/cmp/d' -e '/\|/d' -e '/\^/d' -e '/\\\"/d' -e '/new/d' -e -E '/r[0-9]+/d' {} \;
+
     #clear
     
     #delete empty files
     echo "delete empty files from resources - Current time: $(date +%T)"
-    find resources/files_to_analyse/ -size 0 -print -delete
+    #find resources/files_to_analyse/ -size 0 -print -delete
+    find resources/files_to_analyse/ -type f -empty -print -delete
+
 
     echo 'delete empty files from sootOutput - Current time: $(date +%T)'
-    find sootOutput/ -size 0 -print -delete
+    #find sootOutput/ -size 0 -print -delete
+    find sootOutput/ -type f -empty -print -delete
+
     #clear
 
     end_time=$(date +%s)
