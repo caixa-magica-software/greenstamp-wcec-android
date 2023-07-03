@@ -14,7 +14,7 @@ if [ -s resources/cg.txt ]; then
     echo "$(ls -A sootOutput/)"
     while [ -z  "$(ls -A sootOutput/)" ]
     do
-        echo "Process... - Current time: $(date +%T)"
+        echo "Process soot... - Current time: $(date +%T)"
         java -cp soot-infoflow-cmd-jar-with-dependencies.jar soot.tools.CFGViewer -w -allow-phantom-refs -android-jars "/usr/lib/android-sdk/platforms" -process-multiple-dex -output-format jimple -src-prec apk -process-dir $1
         #clear
     done
